@@ -1,0 +1,190 @@
+openapi: 3.1.0
+info:
+  title: SyllabusAPI
+  version: '1.0'
+  description: 収集したシラバス情報の提供と検索を行う
+  summary: シラバス情報を扱うAPI
+  contact:
+    name: Dango
+    email: 7150macNV777DAI@gmail.com
+  license:
+    identifier: MIT
+    name: MIT
+servers:
+  - url: 'http://localhost:3000/api/syllabus'
+paths:
+  '/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: シラバスの取得
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Syllabus.yaml
+        '404':
+          description: Not Found
+      operationId: get-syllabus-id
+      description: シラバスデータを取得します
+  /search:
+    get:
+      summary: 指定クエリの条件で検索を行います
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Syllabus.yaml
+                example:
+                  - id: 0
+                    sort_id: B6047
+                    subject_name: インターネット
+                    format: オンライン（ライブ）
+                    lang: 日本語
+                    year: 2021
+                    semester: 秋
+                    place: その他
+                    is_giga: false
+                    staffs:
+                      - id: 0
+                        name: 山田　太郎
+                      - id: 1
+                        name: ジョン
+                    styles:
+                      - 講義
+                    target: 環境情報・総合政策学部
+                    term: 通期
+                    unit: 2
+                    type: 共通科目
+                    about: これはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルです
+                    is_unavailable: false
+                    day: 火
+                    period: 2
+                    tags:
+                      - id: 0
+                        name: 情報
+                      - id: 1
+                        name: 通信
+        '400':
+          description: Bad Request
+      operationId: get-search
+      description: |-
+        指定条件で検索を行います
+        クエリに関しては基本的に指定なし=絞り込みしない
+        keyword以外のarrayは全部ORで絞り込み<br>
+        # keyword
+        ## 接続子
+        - AND: \*
+        - OR: +
+        - MINUS: - <br>
+        結合順は計算順と同じ（ANDが優先，OR,MINUSは同じ順）
+
+        ## 例
+        プログラミング\*デザイン+人工知能-アート<br>
+        (プログラミング AND デザイン) OR 人工知能 MINUS アート<br>
+        意味：プログラミングとデザインを含むもの，または人工知能を含むものから，アートを抜いたもの<br>
+
+        ## 制約
+        空のキーワードは許可しない（400）
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: keyword
+          description: エンドポイントのdescriptionに詳細
+          required: true
+        - schema:
+            type: array
+          in: query
+          name: class_format
+          description: 実施形態（オンラインなど）
+        - schema:
+            type: array
+          in: query
+          name: lang
+          description: 言語
+        - schema:
+            type: integer
+          in: query
+          name: year
+          description: 年度
+        - schema:
+            type: string
+          in: query
+          name: semester
+          description: 春・秋・通期
+        - schema:
+            type: array
+          in: query
+          name: place
+          description: 実施場所
+        - schema:
+            type: boolean
+          in: query
+          name: giga
+          description: GIGAの設定
+        - schema:
+            type: array
+          in: query
+          name: staff
+          description: スタッフ検索
+        - schema:
+            type: array
+          in: query
+          name: style
+          description: 授業形態（講義・グループワーク等）
+        - schema:
+            type: string
+          in: query
+          name: target
+          description: 対象（学部・学院）
+        - schema:
+            type: string
+          in: query
+          name: term
+          description: 前半・後半・通期
+        - schema:
+            type: integer
+          in: query
+          name: unit
+          description: 単位
+        - schema:
+            type: string
+          in: query
+          name: type
+          description: 分野（共通科目・先端科目環境情報系など）
+        - schema:
+            type: array
+          in: query
+          name: day_period
+          description: 曜日・時限（月曜1限->m1などで指定）
+        - schema:
+            type: boolean
+          in: query
+          name: nameonly
+          description: タグによる予測検索を無効化し，科目名/ソートIDのみで検索
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+          text/html:
+            schema:
+              type: object
+              properties: {}
+components:
+  schemas: {}
+  securitySchemes: {}

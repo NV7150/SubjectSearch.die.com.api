@@ -1,0 +1,18 @@
+title: Staff
+type: object
+description: スタッフ情報
+properties:
+  id:
+    type: integer
+    description: ID
+  name:
+    type: string
+    description: 教員名
+required:
+  - id
+  - name
+examples:
+  - id: 0
+    name: 山田　太郎
+  - id: 1
+    name: ジョン

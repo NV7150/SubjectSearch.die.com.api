@@ -1,0 +1,16 @@
+title: Tag
+type: object
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+required:
+  - id
+  - name
+examples:
+  - id: 0
+    name: 情報
+  - id: 1
+    name: 通信
+description: 講義に付与されるタグ

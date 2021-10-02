@@ -1,0 +1,117 @@
+title: Syllabus
+type: object
+description: シラバスの基本データ
+examples:
+  - id: 0
+    sort_id: B6047
+    subject_name: インターネット
+    format: オンライン（ライブ）
+    lang: 日本語
+    year: 2021
+    semester: 秋
+    place: その他
+    is_giga: false
+    staffs:
+      - id: 0
+        name: 山田　太郎
+      - id: 1
+        name: ジョン
+    styles:
+      - 講義
+    target: 環境情報・総合政策学部
+    term: 通期
+    unit: 2
+    type: 共通科目
+    about: これはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルですこれはサンプルです
+    is_unavailable: false
+    day: 火
+    period: 2
+    tags:
+      - id: 0
+        name: 情報
+      - id: 1
+        name: 通信
+properties:
+  id:
+    type: integer
+    description: ID
+  sort_id:
+    type: string
+    description: ソートID
+  subject_name:
+    type: string
+    description: 科目名
+  format:
+    type: string
+    description: 方法（オンライン・オンキャンetc..）
+  lang:
+    type: string
+    description: 言語
+  year:
+    type: integer
+    description: 開講年度
+  semester:
+    type: string
+    description: 春/秋/
+  place:
+    type: string
+    description: 開講場所（SFCとか，抽象的なのしかない）
+  is_giga:
+    type: boolean
+    description: GIGAならTrue
+  staffs:
+    type: array
+    description: スタッフのIDのarray
+    items:
+      $ref: ./Staff.yaml
+  styles:
+    type: array
+    description: クラスの講義形式のリスト
+    items:
+      type: string
+  target:
+    type: string
+    description: 学部/院
+  term:
+    type: string
+    description: 前半/後半/通期
+  unit:
+    type: integer
+    description: 単位
+  type:
+    type: string
+    description: 基盤科目・先端科目など
+  about:
+    type: string
+    description: 講義概要
+  is_unavailable:
+    type: boolean
+    description: 現在のシラバスからは削除されている場合はtrue
+  day:
+    type: string
+  period:
+    type: integer
+  tags:
+    type: array
+    description: タグ
+    items:
+      $ref: ./Tag.yaml
+required:
+  - id
+  - sort_id
+  - subject_name
+  - format
+  - lang
+  - year
+  - semester
+  - place
+  - is_giga
+  - staffs
+  - styles
+  - target
+  - term
+  - unit
+  - type
+  - about
+  - is_unavailable
+  - tags
